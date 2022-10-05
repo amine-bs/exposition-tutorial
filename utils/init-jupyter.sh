@@ -4,7 +4,7 @@ WORK_DIR=/home/onyxia/work
 CLONE_DIR=${WORK_DIR}/repo-git
 
 # Clone course repository
-REPO_URL=https://github.com/amine-bs/pytorch-jupyter.git
+REPO_URL=https://github.com/amine-bs/exposition-tutorial.git
 git clone --depth 1 $REPO_URL $CLONE_DIR
 rm -r ${CLONE_DIR}/utils
 cp -r ${CLONE_DIR}/* ${WORK_DIR}/
