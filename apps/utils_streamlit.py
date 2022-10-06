@@ -1,4 +1,4 @@
-from model import ResNet
+from apps.model import ResNet
 from PIL import Image
 import torch
 import torch.nn.functional as F

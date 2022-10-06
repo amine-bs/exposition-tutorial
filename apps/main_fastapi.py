@@ -1,6 +1,6 @@
 from io import BytesIO
 from fastapi import FastAPI, File, UploadFile
-from utils import load_device, import_model, predict, is_image_file
+from apps.utils import load_device, import_model, predict, is_image_file
 from PIL import Image
 
  

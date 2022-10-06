@@ -1,5 +1,5 @@
 import torch
-from utils_streamlit import *
+from apps.utils_streamlit import *
 
 device = load_device()
 model = import_model(bucket="mbenxsalha", key="diffusion/state_dict.pickle", device=device)

@@ -1,14 +1,17 @@
 from io import BytesIO
 from flask import Flask, render_template, request
-from utils import load_device, import_model, predict, load_image
+from apps.utils import load_device, predict, load_image, import_model
 from PIL import Image
 import os
+import base64
+
 
 def read_image(file):
-    img = Image.open(BytesIO(file))
+    img = Image.open(BytesIO(file)).convert("RGB")
     return img
 
 app = Flask(__name__)
+
 
 device = load_device()
 model = import_model(bucket="mbenxsalha", key="diffusion/state_dict.pickle", device=device)
@@ -22,9 +25,12 @@ def home():
 def predict_flask():
     if request.method == "POST":
         file = request.files['file']
-        filename = file.filename
-        file_path = os.path.join('static', filename)
-        file.save(file_path)
-        img = load_image(file_path)
+        img = read_image(file.read())
+
+        data = BytesIO()
+        img.save(data, "JPEG")
+        encoded_img_data = base64.b64encode(data.getvalue())
+        img_data=encoded_img_data.decode('utf-8')
         pred = predict(img, model, device)
-    return render_template("predict.html", output=pred, user_image = file_path)
+        
+    return render_template("predict.html", output=pred, img_data=img_data)
