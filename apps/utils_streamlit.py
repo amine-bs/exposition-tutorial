@@ -1,4 +1,4 @@
-from apps.model import ResNet
+from model import ResNet
 from PIL import Image
 import torch
 import torch.nn.functional as F
@@ -40,7 +40,6 @@ def predict(img, model, device):
         results = "It is not a Pizza!"
     return results
 
-@st.cache()
 def load_device():
     if torch.cuda.is_available():
         device = torch.device('cuda')
